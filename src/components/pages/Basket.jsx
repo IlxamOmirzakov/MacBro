@@ -51,7 +51,7 @@ const Basket = () => {
                                 <AiOutlineDelete color="red"/>
                               </button>
                               <Box display={'flex'} alignItems={'center'} gap={'5px'} borderRadius={'10px'}>
-                                  <IconButton isDisabled={element.quantyti === 1 ? true : false} icon={<AiFillMinusCircle />} onClick={() => dispatch(decrementQuantity(item.id))}/>
+                                  <IconButton isDisabled={item.quantyti === 1 ? true : false} icon={<AiFillMinusCircle />} onClick={() => dispatch(decrementQuantity(item.id))}/>
                                   <Text>{parseInt(item.quantyti)}</Text>
                                   <IconButton  icon={<AiFillPlusCircle />} onClick={() => dispatch(incrementQuantity(item.id))}/>
                               </Box>

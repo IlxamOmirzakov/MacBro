@@ -1,6 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isLoading: true, products: [], basket: [], save: [], isLike:[], totalPrice: 0, selectProducts: [], selectCategories: []};
+const initialState = {
+    isLoading: false,
+    products: [],
+    toSortedProducts: [],
+    theMostExpensive: [],
+    basket: [],
+    save: [],
+    isLike:[],
+    totalPrice: 0,
+    selectProducts: [],
+    selectCategories: []
+};
 export const productSlice = createSlice({
     name: "product",
     initialState,
@@ -12,7 +23,12 @@ export const productSlice = createSlice({
             state.products = action.payload;
             state.isLoading = false;
         },
-
+        setSortProducts(state, action) {
+            state.toSortedProducts = action.payload;
+        },
+        setTheMostExpensive(state, action) {
+            state.theMostExpensive = action.payload;
+        },
         setBasket(state, action) {
             if(!state.basket.find((element) => +element.id === +action.payload.id)){
                 state.basket =[...state.basket, action.payload];
@@ -22,7 +38,9 @@ export const productSlice = createSlice({
             state.basket = action.payload
         },
         setSave(state, action) {
+            // let selectId = action.payload.id
             if (state.save.some((element) => +element.id === +action.payload.id)) {
+                // state.save = [...state.save, action.payload];
                 state.save = state.save.filter(element => +element.id !== +action.payload.id)
             }else{
                 state.save = [...state.save, action.payload]
@@ -62,6 +80,20 @@ export const productSlice = createSlice({
     },
 });
 
-export const { setProducts, isLoadingProduct, setSave, setBasket, setLike, incrementQuantity, decrementQuantity, removeBasket, setTotal, setSelectProducts, setSelectCategories} = productSlice.actions;
+export const {
+    setProducts,
+    isLoadingProduct,
+    setSortProducts,
+    setTheMostExpensive,
+    setSave,
+    setBasket,
+    setLike,
+    incrementQuantity,
+    decrementQuantity,
+    removeBasket,
+    setTotal,
+    setSelectProducts,
+    setSelectCategories
+} = productSlice.actions;
 
 export default productSlice.reducer;
